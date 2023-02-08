@@ -1,0 +1,124 @@
+      <!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      body {
+        font-family: sans-serif;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+
+      .workout-card {
+        background-color: white;
+        border: 1px solid lightgray;
+        border-radius: 10px;
+        width: 300px;
+        height: 200px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+        margin: 10px;
+        overflow: hidden;
+        transition: height 0.5s ease-in-out;
+        position: relative;
+      }
+
+      .workout-card.expanded {
+        height: 400px;
+      }
+
+      .workout-name {
+        font-size: 20px;
+        font-weight: bold;
+        margin-top: 10px;
+      }
+
+      .workout-image {
+        width: 100%;
+        height: 100px;
+        object-fit: cover;
+      }
+
+      .workout-description {
+        font-size: 16px;
+        text-align: center;
+        padding: 10px;
+        display: none;
+      }
+
+      .workout-card.expanded .workout-description {
+        display: block;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background-color: white;
+        border-top: 1px solid lightgray;
+      }
+
+      #tag-select {
+        margin: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <select id="tag-select">
+      <option value="all">All</option>
+      <option value="chest">Chest</option>
+      <option value="arms">Arms</option>
+      <option value="shoulders">Shoulders</option>
+      <option value="legs">Legs</option>
+      <option value="glutes">Glutes</option>
+      <option value="hamstrings">Hamstrings</option>
+      <option value="abs">Abs</option>
+      <option value="core">Core</option>
+    </select>
+
+    <div class="workouts">
+      <div class="workout-card" data-tags="chest,arms,shoulders">
+        <div class="workout-name">Push-Ups</div>
+        <img class="workout-image" src="https://media.giphy.com/media/3o7btNa0YgDcxAIrL6/giphy.gif" alt="Push-Ups">
+        <div class="workout-description">Push-Ups are a bodyweight exercise that strengthen the chest, arms, and shoulders. Start in a plank position with your hands placed slightly wider than shoulder-width apart. Lower your body down until your chest touches the ground and then push back up to the starting position. Repeat for desired reps.</div>
+      </div>
+      <div class="workout-card" data-tags="legs,glutes,ham
+        <div class="workout-card" data-tags="legs,glutes,hamstrings">
+        <div class="workout-name">Squats</div>
+        <img class="workout-image" src="https://media.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif" alt="Squats">
+        <div class="workout-description">Squats are a strength training exercise that work the legs, glutes, and hamstrings. Start with your feet hip-width apart and your hands in front of you. Lower your body down as if you were sitting back into a chair. Push back up to the starting position. Repeat for desired reps.</div>
+      </div>
+      <div class="workout-card" data-tags="abs,core">
+        <div class="workout-name">Plank</div>
+        <img class="workout-image" src="https://media.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif" alt="Plank">
+        <div class="workout-description">Plank is a bodyweight exercise that works the abs and core. Start in a push-up position, but instead of lowering your body down, hold the position for a set amount of time. Keep your body in a straight line and your abs engaged throughout the entire exercise.</div>
+      </div>
+    </div>
+
+    <script>
+      const workoutCards = document.querySelectorAll(".workout-card");
+      const tagSelect = document.querySelector("#tag-select");
+
+      tagSelect.addEventListener("change", function() {
+        const selectedTag = this.value;
+
+        workoutCards.forEach(function(card) {
+          const cardTags = card.dataset.tags.split(",");
+          if (selectedTag === "all" || cardTags.includes(selectedTag)) {
+            card.style.display = "flex";
+          } else {
+            card.style.display = "none";
+          }
+        });
+      });
+
+      workoutCards.forEach(function(card) {
+        card.addEventListener("click", function() {
+          this.classList.toggle("expanded");
+        });
+      });
+    </script>
+  </body>
+</html>
