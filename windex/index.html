@@ -34,25 +34,67 @@
         font-size: 16px;
         margin-bottom: 10px;
       }
+      .filter-container {
+        text-align: center;
+        margin-bottom: 20px;
+      }
     </style>
   </head>
   <body>
+    <div class="filter-container">
+      <form>
+        <label for="tag-select">Filter by Tag:</label>
+        <select id="tag-select">
+          <option value="all">All</option>
+          <option value="chest">Chest</option>
+          <option value="legs">Legs</option>
+          <option value="back">Back</option>
+          <option value="core">Core</option>
+        </select>
+      </form>
+    </div>
     <div class="workout-container">
-      <div class="workout-card">
+      <div class="workout-card" data-tags="chest,triceps,core">
         <div class="workout-name">Push Ups</div>
         <img class="workout-image" src="https://media.giphy.com/media/xUOxfqrN7fMkNkhmKU/giphy.gif" alt="Push Ups">
         <div class="workout-description">Push ups strengthen the chest, triceps, and core.</div>
       </div>
-      <div class="workout-card">
+      <div class="workout-card" data-tags="legs,glutes,lower back">
         <div class="workout-name">Squats</div>
         <img class="workout-image" src="https://media.giphy.com/media/xUPGcglL26JYhllFVm/giphy.gif" alt="Squats">
         <div class="workout-description">Squats strengthen the legs, glutes, and lower back.</div>
       </div>
-      <div class="workout-card">
+      <div class="workout-card" data-tags="back,legs,core">
         <div class="workout-name">Deadlifts</div>
-        <img class="workout-image" src="https://media.giphy.com/media/l0HUuP766RGjb57uI/giphy.gif" alt="Deadlifts">
-        <div class="workout-description">Deadlifts strengthen the back, legs, and core.</div>
-      </div>
-    </div>
-  </body>
+        <img class="workout-image" src="https://media.giphy.com/media/xT9DPzqE4qeVRtj2Qc/giphy.gif" alt="Deadlifts">
+<div class="workout-description">Deadlifts strengthen the back, legs, and core.</div>
+</div>
+<div class="workout-card" data-tags="chest,biceps,shoulders">
+<div class="workout-name">Dumbbell Flys</div>
+<img class="workout-image" src="https://media.giphy.com/media/l0IxBxss1VnWYJHYM/giphy.gif" alt="Dumbbell Flys">
+<div class="workout-description">Dumbbell Flys strengthen the chest, biceps, and shoulders.</div>
+</div>
+<div class="workout-card" data-tags="legs,calves,quadriceps">
+<div class="workout-name">Calf Raises</div>
+<img class="workout-image" src="https://media.giphy.com/media/xUPGcLWjPvBvLcBScg/giphy.gif" alt="Calf Raises">
+<div class="workout-description">Calf Raises strengthen the legs, calves, and quadriceps.</div>
+</div>
+</div>
+<script>
+const tagSelect = document.querySelector("#tag-select");
+const workoutCards = document.querySelectorAll(".workout-card");
+  tagSelect.addEventListener("change", function() {
+    const selectedTag = tagSelect.value;
+    workoutCards.forEach(function(card) {
+      if (selectedTag === "all") {
+        card.style.display = "block";
+      } else if (!card.dataset.tags.split(",").includes(selectedTag)) {
+        card.style.display = "none";
+      } else {
+        card.style.display = "block";
+      }
+    });
+  });
+</script>
+</body>
 </html>
