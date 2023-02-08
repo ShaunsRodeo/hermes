@@ -3,7 +3,7 @@
   <head>
     <title>Workout Tracker</title>
   </head>
-  <body>
+  <body onload="loadWorkouts()">
     <h1>Workout Tracker</h1>
     <form>
       <label for="exercise">Exercise:</label>
@@ -46,6 +46,55 @@
         cell2.innerHTML = reps;
         cell3.innerHTML = weight;
         cell4.innerHTML = sets;
+      
+        saveWorkouts();
+      }
+      
+      function saveWorkouts() {
+        var workouts = [];
+        var table = document.getElementById("workoutTable");
+        for (var i = 1; i < table.rows.length; i++) {
+          var row = table.rows[i];
+          var workout = {
+            exercise: row.cells[0].innerHTML,
+            reps: row.cells[1].innerHTML,
+            weight: row.cells[2].innerHTML,
+            sets: row.cells[3].innerHTML
+          };
+          workouts.push(workout);
+        }
+        var workoutData = JSON.stringify(workouts);
+        document.cookie = "workouts=" + workoutData + "; expires=Thu, 18 Dec 2023 12:00:00 UTC; path=/";
+      }
+      
+      function loadWorkouts() {
+        var cookieData = document.cookie;
+        var start = cookieData.index
+of("workouts=");
+        if (start == -1) {
+          return;
+        }
+        start += "workouts=".length;
+        var end = cookieData.indexOf(";", start);
+        if (end == -1) {
+          end = cookieData.length;
+        }
+        var workoutData = cookieData.substring(start, end);
+        var workouts = JSON.parse(workoutData);
+      
+        var table = document.getElementById("workoutTable");
+        for (var i = 0; i < workouts.length; i++) {
+          var workout = workouts[i];
+          var row = table.insertRow(-1);
+          var cell1 = row.insertCell(0);
+          var cell2 = row.insertCell(1);
+          var cell3 = row.insertCell(2);
+          var cell4 = row.insertCell(3);
+          cell1.innerHTML = workout.exercise;
+          cell2.innerHTML = workout.reps;
+          cell3.innerHTML = workout.weight;
+          cell4.innerHTML = workout.sets;
+        }
       }
     </script>
   </body>
