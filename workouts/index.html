@@ -3,7 +3,7 @@
   <head>
     <title>Workout Tracker</title>
   </head>
-  <body>
+  <body onload="loadWorkouts()">
     <h1>Workout Tracker</h1>
     <form>
       <label for="exercise">Exercise:</label>
@@ -46,8 +46,31 @@
         cell2.innerHTML = reps;
         cell3.innerHTML = weight;
         cell4.innerHTML = sets;
+        
+        saveWorkouts();
       }
+      
+      function saveWorkouts() {
+        var workouts = [];
+        var table = document.getElementById("workoutTable");
+        for (var i = 1; i < table.rows.length; i++) {
+          var row = table.rows[i];
+          var workout = {
+            exercise: row.cells[0].innerHTML,
+            reps: row.cells[1].innerHTML,
+            weight: row.cells[2].innerHTML,
+            sets: row.cells[3].innerHTML
+          };
+          workouts.push(workout);
+        }
+        var workoutsJSON = JSON.stringify(workouts);
+        document.cookie = "workouts=" + workoutsJSON + "; expires=Fri, 31 Dec 9999 23:59:59 GMT;";
+      }
+      
+      function loadWorkouts() {
+        var cookie = document.cookie.split("; ");
+        for (var i = 0; i < cookie.length;
+}
     </script>
   </body>
 </html>
-
