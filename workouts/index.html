@@ -31,81 +31,21 @@
     </table>
     <script>
       function addWorkout() {
-        <script>
-  function addWorkout() {
-    var exercise = document.getElementById("exercise").value;
-    var reps = document.getElementById("reps").value;
-    var weight = document.getElementById("weight").value;
-    var sets = document.getElementById("sets").value;
-
-    var workoutData = getCookie("workoutData");
-    if (workoutData == "") {
-      workoutData = [];
-    } else {
-      workoutData = JSON.parse(workoutData);
-    }
-
-    workoutData.push({
-      exercise: exercise,
-      reps: reps,
-      weight: weight,
-      sets: sets
-    });
-
-    setCookie("workoutData", JSON.stringify(workoutData), 7);
-
-    var table = document.getElementById("workoutTable");
-    var row = table.insertRow(-1);
-    var cell1 = row.insertCell(0);
-    var cell2 = row.insertCell(1);
-    var cell3 = row.insertCell(2);
-    var cell4 = row.insertCell(3);
-    cell1.innerHTML = exercise;
-    cell2.innerHTML = reps;
-    cell3.innerHTML = weight;
-    cell4.innerHTML = sets;
-  }
-
-  function setCookie(cname, cvalue, exdays) {
-    var d = new Date();
-    d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
-    var expires = "expires=" + d.toUTCString();
-    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
-  }
-
-  function getCookie(cname) {
-    var name = cname + "=";
-    var decodedCookie = decodeURIComponent(document.cookie);
-    var ca = decodedCookie.split(";");
-    for (var i = 0; i < ca.length; i++) {
-      var c = ca[i];
-      while (c.charAt(0) == " ") {
-        c = c.substring(1);
-      }
-      if (c.indexOf(name) == 0) {
-        return c.substring(name.length, c.length);
-      }
-    }
-    return "";
-  }
-
-  function loadWorkouts() {
-    var workoutData = getCookie("workoutData");
-    if (workoutData == "") {
-      return;
-    }
-    workoutData = JSON.parse(workoutData);
-
-    var table = document.getElementById("workoutTable");
-    for (var i = 0; i < workoutData.length; i++) {
-      var workout = workoutData[i];
-      var row = table.insertRow(-1);
-      var cell1 = row.insertCell(0);
-      var cell2 = row.insertCell(1);
-      var cell3 = row.insertCell(2);
-      var cell4 = row.insertCell(3);
-      cell1.innerHTML = workout.exercise;
-      cell2.innerHTML = workout.reps;
+        var exercise = document.getElementById("exercise").value;
+        var reps = document.getElementById("reps").value;
+        var weight = document.getElementById("weight").value;
+        var sets = document.getElementById("sets").value;
+      
+        var table = document.getElementById("workoutTable");
+        var row = table.insertRow(-1);
+        var cell1 = row.insertCell(0);
+        var cell2 = row.insertCell(1);
+        var cell3 = row.insertCell(2);
+        var cell4 = row.insertCell(3);
+        cell1.innerHTML = exercise;
+        cell2.innerHTML = reps;
+        cell3.innerHTML = weight;
+        cell4.innerHTML = sets;
       }
     </script>
   </body>
